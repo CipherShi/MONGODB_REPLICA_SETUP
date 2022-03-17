@@ -6,5 +6,9 @@ Connect to the new intance you just created above. There are various ways in whi
  
  bash
  ```
- ssh -i <your-key-here>
+ ssh -i <your-key-pair-here>.pem <public-IPv4-DNS-here>
  ```
+ First we are going to run 
+  ```
+ sudo yum update -y
+  ```
