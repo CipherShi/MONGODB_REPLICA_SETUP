@@ -17,4 +17,9 @@ Create a file using the following command
  ```
  vi /etc/yum.repos.d/mongodb-org-4.2.repo
   ```
-  
+  paste the following code into the vi editor and save.
+
+ ```
+[mongodb-org-4.2]
+name=MongoDB Repository baseurl=https://repo.mongodb.org/yum/amazon/2013.03/mongodb-org/4.2/x86_64/ gpgcheck=1 enabled=1 gpgkey=https://www.mongodb.org/static/pgp/server-4.2.asc 
+ ```
