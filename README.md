@@ -5,5 +5,6 @@ The main goal for this README is to show you how to setup mongodb on AWS EC2 ins
 Connect to the new intance you just created above. There are various ways in which you can connect to the instance. Syntax for SSH into the instance is below:
  
  bash
- ///
+ ```
  ssh -i <your-key-here>
+ ```
