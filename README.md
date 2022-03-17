@@ -12,3 +12,9 @@ Connect to the new intance you just created above. There are various ways in whi
   ```
  sudo yum update -y
   ```
+Create a file using the following command
+
+ ```
+ vi /etc/yum.repos.d/mongodb-org-4.2.repo
+  ```
+  
