@@ -28,8 +28,10 @@ enabled=1
 gpgkey=https://www.mongodb.org/static/pgp/server-4.2.asc 
  ```
  
- Now run thi
+ Now run this to install mongodb on the machine
  ```
  sudo yum install -y mongodb-org
   ```
+  
+  
   
