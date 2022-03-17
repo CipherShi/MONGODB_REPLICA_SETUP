@@ -1,4 +1,4 @@
-# EC2_mongodb_setup
+# EC2 mongodb setup
 The main goal for this README is to show you how to setup mongodb on AWS EC2 instance. You will need to have the instance up and running to continue. Please see AWS documentation for how to setup an a new EC2 intance. We are running an Ubuntu 20.04 machine.
 
 # SSH
