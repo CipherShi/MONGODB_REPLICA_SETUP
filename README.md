@@ -42,27 +42,14 @@ Connect to the new intance you just created above. There are various ways in whi
   ```
   #
   
-  refer to https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
+  For more about how to setup mongodb on ubuntu 20.04 please refer to https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
   #
   # Configure Mongodb Replica Set
   The MongoDB documentation recommends against using IP addresses when configuring a replica set, since IP addresses can change unexpectedly. Instead, MongoDB   recommends using logical DNS hostnames when configuring replica sets.
 
 One way to do this is to configure subdomains for each replication member. Although configuring subdomains would be ideal for a production environment or another long-term solution, this tutorial will outline how to configure DNS resolution by editing each server’s respective hosts files.
 
-#### 1. Configuring DNS Resolution
-hosts is a special file that allows you to assign human-readable hostnames to numerical IP addresses. This means that if the IP address of any of your servers ever changes, you’ll only have to update the hosts file on the three servers instead of reconfiguring the replica set.
-
-On Linux and other Unix-like systems, hosts is stored in the /etc/ directory. On each of your three servers, edit the file with your preferred text editor.
-```
-sudo vi /etc/hosts
-```
-add this to the hosts file:
-```
-<add_node1_IP_address_here>   node1
-<add_node2_IP_address_here>   node2
-<add_node3_IP_address_here>   node3
-```
-#### 2. Updating Each Server’s Firewall Configurations with UFW
+#### 1. Updating Each Server’s Firewall Configurations with UFW
 Open port 27017/tcp and ssh on the firewall:
 ```
 sudo ufw enable
@@ -76,35 +63,35 @@ sudo ss -ltnp | grep -i mongo
 ```
 tcp   LISTEN  0       128                <node_IP_Address>:27017          0.0.0.0:*      users:(("mongod",pid=15288,fd=11)) uid:111 ino:46927 sk:4 <->
 ```
-#### 3. Configure MongoDB Replica set
+#### 2. Configure MongoDB Replica set
 Now that we have everything needed ready, let’s proceed to configure MongoDB replica set.
 Change MongoDB Listen Address from localhost IP on all nodes.
 ```
-sudo vim /etc/mongod.conf
+sudo vi /etc/mongod.conf
 ```
 ```
 # node 1
 # network interfaces
 net:
   port: 27017
-  bindIp: node1
+  bindIp: 0.0.0.0
 
 # node 2
 # network interfaces
 net:
   port: 27017
-  bindIp: node2
+  bindIp: 0.0.0.0
 
 # node 3
 # network interfaces
 net:
   port: 27017
-  bindIp: node3
+  bindIp: 0.0.0.0
 ```
 Also make sure you have enabled replica set on all nodes before exiting your test editor.
 ```
 replication:
-  replSetName: "rs0"
+  replSetName: rs0
 ```
 Now restart mongod service
 ```
@@ -114,11 +101,11 @@ Alternatively
 ```
 sudo service mongod restart
 ```
-#### 4. Initiate MongoDB Replica Set
+#### 3. Initiate MongoDB Replica Set
 Our MongoDB Node1 (node1) will be the PRIMARY and the other two will act as SECONDARY
 Login to the node1 server and start the mongo shell.
 ```
-mongo
+mongo <node1_IP_Address>
 ```
 ```
 MongoDB shell version v5.0.0
@@ -151,7 +138,7 @@ rs.initiate()
 Make sure you get 1 for ok state
 #### 5. Add secondary nodes
 ```
-rs.add("node2")
+rs.add("<node2_IP_Address>")
 ```
 ```
 {
