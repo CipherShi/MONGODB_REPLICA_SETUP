@@ -16,24 +16,29 @@ Connect to the new intance you just created above. There are various ways in whi
   ```
   sudo apt-get update -y
   ```
-  Create a file using the following command
+  Import the public key used by the package management system.
  ```
- vi /etc/yum.repos.d/mongodb-org-4.2.repo
+ wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
   ```
-  paste the following code into the vi editor and save.
-
- ```
-[mongodb-org-4.2]
-name=MongoDB Repository 
-baseurl=https://repo.mongodb.org/yum/amazon/2013.03/mongodb-org/4.2/x86_64/ 
-gpgcheck=1 
-enabled=1 
-gpgkey=https://www.mongodb.org/static/pgp/server-4.2.asc 
- ```
-  Now run this to install mongodb on the machine
- ```
- sudo yum install -y mongodb-org
+  refer to https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/#import-the-public-key-used-by-the-package-management-system
+  Create a list file for MongoDB
   ```
-  
-  
+  echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
+  ```
+  Reload local package database
+  ```
+  sudo apt-get update
+  ```
+  Install mongodb package
+  ```
+  sudo apt-get install -y mongodb-org
+  ```
+  Start mongodb
+  ```
+  sudo systemctl start mongod
+  ```
+  Verify that MongoDB has started successfully.
+  ```
+  sudo systemctl status mongod
+  ```
   
