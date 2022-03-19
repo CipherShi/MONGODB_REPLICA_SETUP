@@ -41,6 +41,7 @@ Connect to the new intance you just created above. There are various ways in whi
   sudo systemctl status mongod
   ```
   #
+  
   refer to https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
   #
   # Configure Mongodb Replica Set
@@ -48,7 +49,7 @@ Connect to the new intance you just created above. There are various ways in whi
 
 One way to do this is to configure subdomains for each replication member. Although configuring subdomains would be ideal for a production environment or another long-term solution, this tutorial will outline how to configure DNS resolution by editing each server’s respective hosts files.
 
-#### Configuring DNS Resolution
+#### 1. Configuring DNS Resolution
 hosts is a special file that allows you to assign human-readable hostnames to numerical IP addresses. This means that if the IP address of any of your servers ever changes, you’ll only have to update the hosts file on the three servers instead of reconfiguring the replica set.
 
 On Linux and other Unix-like systems, hosts is stored in the /etc/ directory. On each of your three servers, edit the file with your preferred text editor.
@@ -61,7 +62,7 @@ add this to the hosts file:
 <add_node2_IP_address_here>   node2
 <add_node3_IP_address_here>   node3
 ```
-#### Updating Each Server’s Firewall Configurations with UFW
+#### 2. Updating Each Server’s Firewall Configurations with UFW
 Open port 27017/tcp and ssh on the firewall:
 ```
 sudo ufw enable
@@ -75,7 +76,7 @@ ss -tunelp | grep -i mongo
 ```
 tcp   LISTEN  0       128                <node_IP_Address>:27017          0.0.0.0:*      users:(("mongod",pid=15288,fd=11)) uid:111 ino:46927 sk:4 <->
 ```
-#### Configure MongoDB Replica set
+#### 3. Configure MongoDB Replica set
 Now that we have everything needed ready, let’s proceed to configure MongoDB replica set.
 Change MongoDB Listen Address from localhost IP on all nodes.
 ```
@@ -113,7 +114,7 @@ Alternatively
 ```
 sudo service mongod restart
 ```
-#### Initiate MongoDB Replica Set
+#### 4. Initiate MongoDB Replica Set
 Our MongoDB Node1 (node1) will be the PRIMARY and the other two will act as SECONDARY
 Login to the node1 server and start the mongo shell.
 ```
@@ -148,7 +149,7 @@ rs.initiate()
 }
 ```
 Make sure you get 1 for ok state
-#### Add secondary nodes
+#### 5. Add secondary nodes
 ```
 rs.add("node2")
 ```
