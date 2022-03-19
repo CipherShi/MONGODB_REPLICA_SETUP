@@ -20,7 +20,7 @@ Connect to the new intance you just created above. There are various ways in whi
  ```
  wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
   ``` 
-  Create a list file for MongoDB
+  Once the key has been imported, add the repository:
   ```
   echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
   ```
