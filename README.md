@@ -98,6 +98,7 @@ If you now run
 sudo ss -ltnp | grep -i mongo
 ```
 you can see mongod is no longer bound to localhost ie 127.0.0.1.
+
 Also make sure you have enabled replica set on all nodes before exiting your test editor.
 ```
 replication:
