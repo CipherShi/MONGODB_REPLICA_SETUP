@@ -20,7 +20,7 @@ Connect to the new intance you just created above. There are various ways in whi
  ```
  wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
   ```
-  refer to https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/#import-the-public-key-used-by-the-package-management-system
+  #### refer to https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/#import-the-public-key-used-by-the-package-management-system
   
   Create a list file for MongoDB
   ```
