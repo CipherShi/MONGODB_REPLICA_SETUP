@@ -8,12 +8,15 @@ Connect to the new intance you just created above. There are various ways in whi
  ```
  ssh -i <your-key-pair-here>.pem <public-IPv4-DNS-here>
  ```
- First we are going to run 
+ First we are going to run the command below to update all your packages.
   ```
  sudo apt update -y
   ```
-Create a file using the following command
-
+  alternatively you can run
+  ```
+  sudo apt-get update -y
+  ```
+  Create a file using the following command
  ```
  vi /etc/yum.repos.d/mongodb-org-4.2.repo
   ```
@@ -27,8 +30,7 @@ gpgcheck=1
 enabled=1 
 gpgkey=https://www.mongodb.org/static/pgp/server-4.2.asc 
  ```
- 
- Now run this to install mongodb on the machine
+  Now run this to install mongodb on the machine
  ```
  sudo yum install -y mongodb-org
   ```
