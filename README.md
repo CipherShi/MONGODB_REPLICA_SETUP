@@ -71,7 +71,7 @@ sudo ufw allow 27017/tcp
 ```
 Check the listen Address of MongoDB service:
 ```
-ss -tunelp | grep -i mongo
+sudo ss -ltnp | grep -i mongo
 ```
 ```
 tcp   LISTEN  0       128                <node_IP_Address>:27017          0.0.0.0:*      users:(("mongod",pid=15288,fd=11)) uid:111 ino:46927 sk:4 <->
