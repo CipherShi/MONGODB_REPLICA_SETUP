@@ -93,12 +93,6 @@ net:
   port: 27017
   bindIp: 0.0.0.0
 ```
-If you now run
-```
-sudo ss -ltnp | grep -i mongo
-```
-you can see mongod is no longer bound to localhost ie 127.0.0.1.
-
 Also make sure you have enabled replica set on all nodes before exiting your test editor.
 ```
 replication:
@@ -112,6 +106,11 @@ Alternatively
 ```
 sudo service mongod restart
 ```
+If you now run
+```
+sudo ss -ltnp | grep -i mongo
+```
+you can see mongod is no longer bound to localhost ie 127.0.0.1.
 #### 3. Initiate MongoDB Replica Set
 Our MongoDB Node1 (node1) will be the PRIMARY and the other two will act as SECONDARY
 Login to the node1 server and start the mongo shell.
