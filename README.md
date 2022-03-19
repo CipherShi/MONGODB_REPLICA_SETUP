@@ -2,12 +2,14 @@
 The main goal for this README is to show you how to setup Mongodb with replica Set on an Ubuntu 20.04 AWS EC2 instance. You will need to have the instance up and running to continue. Please see AWS documentation for how to setup an a new EC2 intance. We are running an Ubuntu 20.04 LTS machine.
 
 # 
+#### 1. Connect to your newly created instance.
 Connect to the new intance you just created above. There are various ways in which you can connect to the instance. Syntax for SSH into the instance is below:
  
  bash
  ```
  ssh -i <your-key-pair-here>.pem <public-IPv4-DNS-here>
  ```
+ #### 2. Update all system packages.
  First we are going to run the command below to update all your packages.
   ```
  sudo apt update -y
@@ -16,10 +18,12 @@ Connect to the new intance you just created above. There are various ways in whi
   ```
   sudo apt-get update -y
   ```
+  #### 3. Import public key.
   Import the public key used by the package management system.
  ```
  wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
   ``` 
+  #### 4. Add Mongodb repo
   Once the key has been imported, add the repository:
   ```
   echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
@@ -28,10 +32,12 @@ Connect to the new intance you just created above. There are various ways in whi
   ```
   sudo apt-get update
   ```
-  Install mongodb package
+  #### 5. Install mongodb package
+  Install the latest stable version of mongodb. Optional. Although you can specify any available version of MongoDB, apt-get will upgrade the packages when a newer version becomes available.
   ```
   sudo apt-get install -y mongodb-org
   ```
+  #### 6. Configure systemctl.
   Configure MongoDB to start during the operating system’s boot
   ```
   sudo systemctl start mongod
