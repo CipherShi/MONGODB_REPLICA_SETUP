@@ -65,8 +65,9 @@ Check the listen Address of MongoDB service:
 sudo ss -ltnp | grep -i mongo
 ```
 ```
-tcp   LISTEN  0       128                <node_IP_Address>:27017          0.0.0.0:*      users:(("mongod",pid=15288,fd=11)) uid:111 ino:46927 sk:4 <->
+tcp   LISTEN  0       128                127.0.0.1:27017          0.0.0.0:*      users:(("mongod",pid=15288,fd=11)) uid:111 ino:46927 sk:4 <->
 ```
+As you can see above mongodb is currently bound to locahost ie. 127.0.0.1.
 #### 2. Configure MongoDB Replica set
 Now that we have everything needed ready, let’s proceed to configure MongoDB replica set.
 Change MongoDB Listen Address from localhost IP on all nodes.
@@ -92,6 +93,11 @@ net:
   port: 27017
   bindIp: 0.0.0.0
 ```
+If you now run
+```
+sudo ss -ltnp | grep -i mongo
+```
+you can see mongod is no longer bound to localhost ie 127.0.0.1.
 Also make sure you have enabled replica set on all nodes before exiting your test editor.
 ```
 replication:
