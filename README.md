@@ -126,7 +126,7 @@ For interactive help, type "help".
 ...
 >
 ```
-Initialize replica set on node1 by running below command:
+Initialize replica set on node1(Only run this on the PRIMARY node) by running below command:
 ```
 rs.initiate()
 ```
