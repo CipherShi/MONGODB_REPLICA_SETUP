@@ -53,8 +53,6 @@ Connect to the new intance you just created above. There are various ways in whi
   # Configure Mongodb Replica Set
   The MongoDB documentation recommends against using IP addresses when configuring a replica set, since IP addresses can change unexpectedly. Instead, MongoDB   recommends using logical DNS hostnames when configuring replica sets.
 
-One way to do this is to configure subdomains for each replication member. Although configuring subdomains would be ideal for a production environment or another long-term solution, this tutorial will outline how to configure DNS resolution by editing each server’s respective hosts files.
-
 #### 1. Updating Each Server’s Firewall Configurations with UFW
 Open port 27017/tcp and ssh on the firewall:
 ```
