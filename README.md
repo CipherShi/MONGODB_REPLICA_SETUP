@@ -19,9 +19,7 @@ Connect to the new intance you just created above. There are various ways in whi
   Import the public key used by the package management system.
  ```
  wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
-  ```
-  #### refer to https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/#import-the-public-key-used-by-the-package-management-system
-  
+  ``` 
   Create a list file for MongoDB
   ```
   echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
@@ -42,4 +40,5 @@ Connect to the new intance you just created above. There are various ways in whi
   ```
   sudo systemctl status mongod
   ```
-  
+  #
+  refer to https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
