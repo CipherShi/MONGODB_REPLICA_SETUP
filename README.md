@@ -48,6 +48,10 @@ Connect to the new intance you just created above. There are various ways in whi
   ```
   #
   
+  TODO: CONFIGURE NGINX
+  
+  #
+  
   For more about how to setup mongodb on ubuntu 20.04 please refer to https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
   #
   # Configure Mongodb Replica Set
