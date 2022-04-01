@@ -92,7 +92,8 @@ Connect to the new intance you just created above. There are various ways in whi
   The MongoDB documentation recommends against using IP addresses when configuring a replica set, since IP addresses can change unexpectedly. Instead, MongoDB   recommends using logical DNS hostnames when configuring replica sets.
 
 #### 1. Updating Each Server’s Firewall Configurations with UFW
-Open port <port>/tcp and ssh on the firewall:
+Add your connection port and ssh port on the firewall.
+Swap (open-port) with the port you just added to the nginx config file above.
 ```
 sudo ufw enable
 sudo ufw allow ssh
@@ -153,7 +154,7 @@ you can see mongod is no longer bound to localhost ie 127.0.0.1.
 Our MongoDB Node1 (node1) will be the PRIMARY and the other two will act as SECONDARY
 Login to the node1 server and start the mongo shell.
 ```
-mongo <node1_IP_Address>
+mongo <node1_IP_Address>:<port>
 ```
 ```
 MongoDB shell version v5.0.0
