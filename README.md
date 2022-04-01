@@ -55,7 +55,7 @@ Connect to the new intance you just created above. There are various ways in whi
   ```
   sudo apt-get install -y nginx
   ```
-  #### 2. Edit Nginx config file to route all all incoming connections to mongodb
+  #### 2. Edit Nginx config file to route all incoming connections to mongodb
   You can find where nginx is installed using the below command
   ```
   whereis nginx
@@ -73,7 +73,7 @@ Connect to the new intance you just created above. There are various ways in whi
   ```
   sudo vi /etc/nginx/nginx.conf
   ```
-  Next we will add the following above the http map
+  Next we will add the following above the http config
   ```
   stream {
       server {
@@ -86,7 +86,7 @@ Connect to the new intance you just created above. There are various ways in whi
       }
   }
   ```
-  Note the port nginx is listening to (ie. open-port) should be different with the port mongodb is running on.
+  Note the port nginx is listening to (ie. open-port) should be different with the port mongodb is running on (ie. port).
   #
   # Configure Mongodb Replica Set
   The MongoDB documentation recommends against using IP addresses when configuring a replica set, since IP addresses can change unexpectedly. Instead, MongoDB   recommends using logical DNS hostnames when configuring replica sets.
