@@ -47,29 +47,63 @@ Connect to the new intance you just created above. There are various ways in whi
   sudo systemctl status mongod
   ```
   #
-  
-  TODO: CONFIGURE NGINX
-  
-  #
-  
   For more about how to setup mongodb on ubuntu 20.04 please refer to https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
+  #
+  # Configure Nginx
+  We will use nginx as our reverse proxy
+  #### 1. Install Nginx
+  ```
+  sudo apt-get install -y nginx
+  ```
+  #### 2. Edit Nginx config file to route all all incoming connections to mongodb
+  You can find where nginx is installed using the below command
+  ```
+  whereis nginx
+  ```
+  output will look like:
+  ```
+  nginx: /usr/sbin/nginx /usr/lib/nginx /etc/nginx /usr/share/nginx /usr/share/man/man8/nginx.8.gz
+  ```
+  Next we will cd into /etc/nginx and open nginx.conf file in a text editor
+  ```
+  cd /etc/nginx
+  sudo vi nginx.conf
+  ```
+  Alternatively you can run
+  ```
+  sudo vi /etc/nginx/nginx.conf
+  ```
+  Next we will add the following above the http map
+  ```
+  stream {
+      server {
+          listen <open-port>;
+          proxy_pass stream_mongo_backend;
+      }
+  
+      upstream stream_mongo_backend {
+           server 0.0.0.0:<port>;
+      }
+  }
+  ```
+  Note the port nginx is listening to (ie. open-port) should be different with the port mongodb is running on.
   #
   # Configure Mongodb Replica Set
   The MongoDB documentation recommends against using IP addresses when configuring a replica set, since IP addresses can change unexpectedly. Instead, MongoDB   recommends using logical DNS hostnames when configuring replica sets.
 
 #### 1. Updating Each Server’s Firewall Configurations with UFW
-Open port 27017/tcp and ssh on the firewall:
+Open port <port>/tcp and ssh on the firewall:
 ```
 sudo ufw enable
 sudo ufw allow ssh
-sudo ufw allow 27017/tcp
+sudo ufw allow <open-port>/tcp
 ```
 Check the listen Address of MongoDB service:
 ```
 sudo ss -ltnp | grep -i mongo
 ```
 ```
-tcp   LISTEN  0       128                127.0.0.1:27017          0.0.0.0:*      users:(("mongod",pid=15288,fd=11)) uid:111 ino:46927 sk:4 <->
+tcp   LISTEN  0       128                127.0.0.1:<port>          0.0.0.0:*      users:(("mongod",pid=15288,fd=11)) uid:111 ino:46927 sk:4 <->
 ```
 As you can see above mongodb is currently bound to locahost ie. 127.0.0.1.
 #### 2. Configure MongoDB Replica set
@@ -82,19 +116,19 @@ sudo vi /etc/mongod.conf
 # node 1
 # network interfaces
 net:
-  port: 27017
+  port: <port>
   bindIp: 0.0.0.0
 
 # node 2
 # network interfaces
 net:
-  port: 27017
+  port: <port>
   bindIp: 0.0.0.0
 
 # node 3
 # network interfaces
 net:
-  port: 27017
+  port: <port>
   bindIp: 0.0.0.0
 ```
 Also make sure you have enabled replica set on all nodes before exiting your test editor.
@@ -123,7 +157,7 @@ mongo <node1_IP_Address>
 ```
 ```
 MongoDB shell version v5.0.0
-connecting to: mongodb://<node1_IP_Address>:27017/test
+connecting to: mongodb://<node1_IP_Address>:<port>/test
 MongoDB server version: 5.0.0
 Welcome to the MongoDB shell.
 For interactive help, type "help".
@@ -137,7 +171,7 @@ rs.initiate()
 ```
 {
         "info2" : "no configuration specified. Using a default configuration for the set",                                                           
-        "me" : "<node1_IP_Address>:27017",
+        "me" : "<node1_IP_Address>:<port>",
         "ok" : 1,
         "operationTime" : Timestamp(1534797235, 1),
         "$clusterTime" : {
