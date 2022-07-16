@@ -1,4 +1,4 @@
-# AWS EC2 mongodb setup
+# MONGODB SETUP
 The main goal for this README is to show you how to setup Mongodb with replica Set on an Ubuntu 20.04 AWS EC2 instance. You will need to have the instance up and running to continue. Please see AWS documentation for how to setup an a new EC2 intance. We are running an Ubuntu 20.04 LTS machine.
 
 # 
