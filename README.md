@@ -49,45 +49,6 @@ Connect to the new intance you just created above. There are various ways in whi
   #
   For more about how to setup mongodb on ubuntu 20.04 please refer to https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
   #
-  # Configure Nginx
-  We will use nginx as our reverse proxy
-  #### 1. Install Nginx
-  ```
-  sudo apt-get install -y nginx
-  ```
-  #### 2. Edit Nginx config file to route all incoming connections to mongodb
-  You can find where nginx is installed using the below command
-  ```
-  whereis nginx
-  ```
-  output will look like:
-  ```
-  nginx: /usr/sbin/nginx /usr/lib/nginx /etc/nginx /usr/share/nginx /usr/share/man/man8/nginx.8.gz
-  ```
-  Next we will cd into /etc/nginx and open nginx.conf file in a text editor
-  ```
-  cd /etc/nginx
-  sudo vi nginx.conf
-  ```
-  Alternatively you can run
-  ```
-  sudo vi /etc/nginx/nginx.conf
-  ```
-  Next we will add the following above the http config
-  ```
-  stream {
-      server {
-          listen <open-port>;
-          proxy_pass stream_mongo_backend;
-      }
-  
-      upstream stream_mongo_backend {
-           server 0.0.0.0:<port>;
-      }
-  }
-  ```
-  Note the port nginx is listening to (ie. open-port) should be different with the port mongodb is running on (ie. port).
-  #
   # Configure Mongodb Replica Set
   The MongoDB documentation recommends against using IP addresses when configuring a replica set, since IP addresses can change unexpectedly. Instead, MongoDB   recommends using logical DNS hostnames when configuring replica sets.
 
